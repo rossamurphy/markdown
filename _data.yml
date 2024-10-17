@@ -1,0 +1,17 @@
+lang: en
+
+home:
+  welcome: Hey, welcome to the OneContext Blog! 
+
+menu_links: []
+extra_head: []
+
+# Metas plugin https://lume.land/plugins/metas/#description
+metas:
+  site: OneContext Blog 
+  description: Here's where we write about stuff we think is important 
+  title: "=title"
+  image: "=image"
+  twitter: "@username"
+  lang: en
+  
