@@ -1,7 +1,7 @@
 import date, {Options as DateOptions} from "lume/plugins/date.ts";
 import postcss from "lume/plugins/postcss.ts";
 import terser from "lume/plugins/terser.ts";
-import prism, { Options as PrismOptions } from "lume/plugins/prism.ts";
+import prism, {Options as PrismOptions} from "lume/plugins/prism.ts";
 import basePath from "lume/plugins/base_path.ts";
 import slugifyUrls from "lume/plugins/slugify_urls.ts";
 import resolveUrls from "lume/plugins/resolve_urls.ts";
@@ -23,7 +23,11 @@ import katex from "lume/plugins/katex.ts";
 // minify it
 import minifyHTML from "lume/plugins/minify_html.ts";
 // mermaid
-import mermaid from "@ooker777/lume-mermaid-plugin/";
+// import mermaid from "@ooker777/lume-mermaid-plugin/";
+import mermaid from "./plugins/mermaid/mod.js";
+// for rendering jsx components in markdown template engine
+import jsx from "lume/plugins/jsx_preact.ts";
+import mdx from "lume/plugins/mdx.ts";
 
 
 import "lume/types.ts";
@@ -71,7 +75,10 @@ export default function (userOptions?: Options) {
       .use(basePath())
       .use(toc())
       .use(prism(options.prism))
-      .use(readingInfo())
+      .use(readingInfo({
+        wordsPerMinute: 275,
+        extensions: [".md", ".mdx"],
+      }))
       .use(date(options.date))
       .use(metas())
       .use(image())
@@ -86,6 +93,8 @@ export default function (userOptions?: Options) {
       .use(katex())
       .use(mermaid())
       .use(minifyHTML())
+      .use(jsx())
+      .use(mdx(/* Options */))
       .copy("fonts")
       .copy("js")
       .copy("favicon.png")
@@ -93,7 +102,7 @@ export default function (userOptions?: Options) {
       .mergeKey("extra_head", "stringArray")
       .copy("assets")
       .ignore("README.md", "CHANGELOG.md", "node_modules")
-      .preprocess([".md"], (pages) => {
+      .preprocess([".md", ".mdx"], (pages) => {
         for (const page of pages) {
           page.data.excerpt ??= (page.data.content as string).split(
             /<!--\s*more\s*-->/i,

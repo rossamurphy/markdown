@@ -84,6 +84,7 @@ cms.document(
 
 cms.collection(
   "posts: Blog posts",
+  "src:posts/*.mdx",
   "src:posts/*.md",
   [
     "title: text",
@@ -130,6 +131,7 @@ cms.collection(
 
 cms.collection(
   "pages: Additional pages, like about, contact, etc.",
+  "src:pages/*.mdx",
   "src:pages/*.md",
   [
     {
