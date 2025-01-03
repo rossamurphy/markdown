@@ -6,6 +6,10 @@
         {{ post.title || post.url }}
       </a>
     </h2>
+    
+    {{ if post.excerpt }}
+        <p class="post-excerpt">"{{ post.excerpt }}"</p>
+    {{ /if }}
 
     {{ include "templates/post-details.vto" {
       date: post.date,
