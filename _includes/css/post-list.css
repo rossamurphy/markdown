@@ -24,6 +24,7 @@
 
     & a {
       text-decoration: none;
+      font-size: clamp(20px, 2vw, 30px);
     }
   }
 }
