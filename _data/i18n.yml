@@ -3,8 +3,8 @@ nav:
   next_post: Newer post →
   previous_post: ← Older post
   continue_reading: Continue reading →
-  archive_title: Archive
-  archive: More posts can be found in <a href="/archive/">the archive</a>.
+  archive_title: Posts
+  archive: More posts can be found in <a href="/posts/">the posts directory</a>.
   back: ← Back
   page: Page
   next: Next →

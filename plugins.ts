@@ -5,6 +5,7 @@ import prism, {Options as PrismOptions} from "lume/plugins/prism.ts";
 import basePath from "lume/plugins/base_path.ts";
 import slugifyUrls from "lume/plugins/slugify_urls.ts";
 import resolveUrls from "lume/plugins/resolve_urls.ts";
+import filterPages from "lume/plugins/filter_pages.ts";
 import metas from "lume/plugins/metas.ts";
 import pagefind, {Options as PagefindOptions} from "lume/plugins/pagefind.ts";
 import sitemap from "lume/plugins/sitemap.ts";
@@ -86,6 +87,11 @@ export default function (userOptions?: Options) {
       .use(resolveUrls())
       .use(slugifyUrls())
       .use(terser())
+      .use(filterPages({
+      extensions: [".html", ".json"],
+      // deno-lint-ignore no-explicit-any
+      fn: (page: any) => page.data.ignored !== true,
+      }))
       .use(pagefind(options.pagefind))
       .use(sitemap())
       .use(feed(options.feed))

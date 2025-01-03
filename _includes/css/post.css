@@ -3,7 +3,9 @@
 }
 
 .post-title {
-  font: var(--font-display);
+  font-family: var(--font-display);  /* Changed from font: to font-family: */
+  font-weight: 500;  /* Add weight if needed */
+  font-size: 2em;    /* Add size if needed */
   letter-spacing: var(--font-display-spacing);
   margin: 0 0 0.2em;
   text-wrap: balance;

@@ -29,7 +29,7 @@
       </a>
 
       <ul class="navbar-links">
-      {{- for entry of search.pages("menu.visible=true", "menu.order") }}
+        {{- for entry of search.pages("menu.navvisible=true", "menu.navorder") }}
         <li>
           <a href="{{ entry.url }}"{{ if entry.url == url }} aria-current="page"{{ /if }}>
             {{ entry.menu.title || entry.title }}
@@ -67,5 +67,23 @@
     </main>
 
     <!-- Current page: {{ url }} -->
+  <footer class="footer">
+        <ul class="footer-links">
+        {{- for entry of search.pages("menu.footervisible=true", "menu.footerorder") }}
+          <li>
+            <a href="{{ entry.url }}"{{ if entry.url == url }} aria-current="page"{{ /if }}>
+              {{ entry.menu.title || entry.title }}
+            </a>
+          </li>
+        {{ /for }}
+        {{- for link of it.menu_links }}
+          <li>
+            <a href="{{ link.href }}"{{ if link.target }} target="{{link.target}}"{{ /if }}>
+              {{ link.text }}
+            </a>
+          </li>
+        {{ /for }}
+        </ul>
+  </footer>
   </body>
 </html>

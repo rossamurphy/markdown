@@ -1,15 +1,15 @@
 lang: en
 
 home:
-  welcome: Hey, welcome to the OneContext Blog! 
+  welcome: Hey, welcome to my homepage. 
 
 menu_links: []
 extra_head: []
 
 # Metas plugin https://lume.land/plugins/metas/#description
 metas:
-  site: OneContext Blog 
-  description: Here's where we write about stuff we think is important 
+  site: Ross Murphy 
+  description: Here's where I write about stuff I think is important 
   title: "=title"
   image: "=image"
   twitter: "@username"

@@ -3,15 +3,51 @@
 
 /* Custom components */
 @import "css/navbar.css";
+@import "css/footer.css";
 @import "css/page.css";
 @import "css/post-list.css";
 @import "css/post.css";
 @import "css/comments.css";
 
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Jersey+15&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Sixtyfour:SCAN@-53&display=swap');
+
+
 /* Make the links black */
 :root {
   --color-link: var(--color-base);
   --color-link-hover: var(--color-dim);
+  --font-display: 'Inconsolata', sans-serif;
+  --font-ui-bold:  'Inconsolata', sans-serif;
+  --font-body: 'Inconsolata', sans-serif;
+  --font-small: 'Inconsolata', sans-serif;
+  --font-navbar-home: 'Inconsolata', sans-serif;
+  --font-body-bold: bold 'Inconsolata', sans-serif;
+  --font-display-spacing: 'Inconsolata', sans-serif;
+  --font-body-spacing: 'Inconsolata', sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;  /* Use flexbox layout */
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-body);
+}
+
+main {
+  flex: 1;  /* This makes main take up all available space */
+  max-width: min(100% - 15vw, 45em);
+  min-width: 50vw;
+  margin: 0 auto;
+  padding: var(--row-gap-medium) 0;
+}
+
+footer {
+  margin-top: auto;  /* Push footer to bottom when content is short */
 }
 
 
@@ -61,12 +97,12 @@ img {
   color: #3b82f6; /* Tailwind Blue 500 */
 }
 [data-theme="light"] strong {
-  color: #3b82f6; /* Tailwind Blue 500 */
+  color: #1e40af; /* Tailwind Blue 500 */
 }
 
 /* Dark theme background */
 [data-theme="dark"] body {
-  background-color: #262626; /* Example: dark gray background for dark theme */
+  background-color: #393939; /* Example: dark gray background for dark theme */
 }
 
 /* Further light theme settings */
@@ -98,7 +134,7 @@ img {
   color: #eff6ff; /* Tailwind Blue 50 */
 }
 [data-theme="dark"] p {
-  color: #eff6ff; /* Tailwind Blue 50 */
+  color: #eeeeee; /* Tailwind Blue 50 */
 }
 
 
@@ -110,9 +146,11 @@ img {
 /* Page layout */
 main {
   padding: var(--row-gap-medium) 0;
-  font-family: 'Roboto', sans-serif;
   max-width: min(100% - 15vw, 45em);
+  flex-grow: 1;
   margin: 0 auto;
+  min-height: 0;
+  flex: 1 0 auto;
 
   & > :first-child {
     margin-top: 0;
