@@ -13,7 +13,60 @@ Most of GFH (GitHub Flavoured Markdown) is respected by default.
 
 ## How many roads must a man walk down?
 
-Before you call him a man?
+```javascript
+const random = Math.floor(Math.random()*1000) + 1
+console.log(`${random} roads.`)
+```
+
+and
+
+```go
+package main
+
+import (
+	"fmt"
+	"gonum.org/v1/gonum/blas/blas64"
+	"gonum.org/v1/gonum/lapack/lapack64"
+	"gonum.org/v1/gonum/mat"
+	blasnetlib "gonum.org/v1/netlib/blas/netlib"
+	lapacknetlib "gonum.org/v1/netlib/lapack/netlib"
+	"math/rand"
+	"time"
+)
+
+func init() {
+	blas64.Use(blasnetlib.Implementation{})
+	lapack64.Use(lapacknetlib.Implementation{})
+}
+
+func main() {
+	t1 := time.Now()
+	data := make([]float64, 2000*2000)
+	for i := range data {
+		data[i] = rand.Float64()
+	}
+	t2 := time.Now()
+	a := mat.NewDense(2000, 2000, data)
+	t3 := time.Now()
+	a.Mul(a.T(), a)
+	t4 := time.Now()
+	var eigen mat.Eigen
+	eigen.Factorize(a, mat.EigenNone)
+
+	t5 := time.Now()
+	svd := new(mat.SVD)
+
+	svd.Factorize(a, mat.SVDNone)
+	t6 := time.Now()
+
+	fmt.Println("Total time taken:", time.Since(t1))
+	fmt.Println("Time taken to generate data:", t2.Sub(t1))
+	fmt.Println("Time taken to create matrix:", t3.Sub(t2))
+	fmt.Println("Time taken to multiply matrix:", t4.Sub(t3))
+	fmt.Println("Time taken to calculate eigenvalues:", t5.Sub(t4))
+	fmt.Println("Time taken to calculate svd:", t6.Sub(t5))
+}
+```
 
 ## You can also include nice memes 
 
@@ -91,19 +144,6 @@ graph TD;
     FAILURE-->EVIDENCE-AGGREGATOR
     end
 ```
-
-###### Code syntax highlighting
-
-```js
-const queryPipeline: OneContext.PipelineCreateType = \
-OneContext.PipelineCreateSchema.parse({
-  API_KEY: API_KEY,
-  pipelineName: queryPipelineName,
-  pipelineYaml: "./query.yaml",
-})
-await OneContext.createPipeline(queryPipeline);
-```
-
 
 ##### An even more involved Mermaid diagram 
 

@@ -12,10 +12,10 @@ import sitemap from "lume/plugins/sitemap.ts";
 import feed, {Options as FeedOptions} from "lume/plugins/feed.ts";
 import readingInfo from "lume/plugins/reading_info.ts";
 import {merge} from "lume/core/utils/object.ts";
-import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.1/toc.ts";
-import image from "https://deno.land/x/lume_markdown_plugins@v0.7.1/image.ts";
-import footnotes from "https://deno.land/x/lume_markdown_plugins@v0.7.1/footnotes.ts";
-import {alert} from "npm:@mdit/plugin-alert@0.13.1";
+import toc from "https://deno.land/x/lume_markdown_plugins@v0.8.0/toc.ts";
+import image from "https://deno.land/x/lume_markdown_plugins@v0.8.0/image.ts";
+import footnotes from "https://deno.land/x/lume_markdown_plugins@v0.8.0/footnotes.ts";
+import {alert} from "npm:@mdit/plugin-alert@0.14.0";
 // code highlighting
 // inline images and svgs and js
 import inline from "lume/plugins/inline.ts";
@@ -29,6 +29,11 @@ import mermaid from "./plugins/mermaid/mod.js";
 // for rendering jsx components in markdown template engine
 import jsx from "lume/plugins/jsx_preact.ts";
 import mdx from "lume/plugins/mdx.ts";
+
+import "npm:prismjs@1.29.0/components/prism-rust.js";
+import "npm:prismjs@1.29.0/components/prism-go.js";
+import "npm:prismjs@1.29.0/components/prism-typescript.js";
+import "npm:prismjs@1.29.0/components/prism-python.js";
 
 
 import "lume/types.ts";
@@ -56,23 +61,25 @@ export const defaults: Options = {
     {
       theme: [
         {
-          name: "funky",
+          name: "dark",
           path: "/_includes/css/code_light.css",
         },
         {
-          name: "funky",
+          name: "dark",
           path: "/_includes/css/code_dark.css",
         },
       ]
     },
 };
 
+
 /** Configure the site */
 export default function (userOptions?: Options) {
   const options = merge(defaults, userOptions);
 
   return (site: Lume.Site) => {
-    site.use(postcss())
+    site
+      .use(postcss())
       .use(basePath())
       .use(toc())
       .use(prism(options.prism))
@@ -118,11 +125,13 @@ export default function (userOptions?: Options) {
 
     // Alert plugin
     site.hooks.addMarkdownItPlugin(alert);
+    site.copy("/css/code_dark.css")
+    site.copy("/css/code_light.css")
 
     // Mastodon comment system
     site.remoteFile(
       "/js/comments.js",
-      "https://unpkg.com/@oom/mastodon-comments@0.2.2/src/comments.js",
+      "https://unpkg.com/@oom/mastodon-comments@0.3.2/src/comments.js",
     );
   };
 }

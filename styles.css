@@ -11,7 +11,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Jersey+15&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Sixtyfour:SCAN@-53&display=swap');
 
+/* Override light theme when in dark mode */
+[data-theme="light"] #dark-theme {
+  display: none;
+}
 
+[data-theme="dark"] #light-theme {
+  display: none;
+}
 /* Make the links black */
 :root {
   --color-link: var(--color-base);
@@ -24,6 +31,13 @@
   --font-body-bold: bold 'Inconsolata', sans-serif;
   --font-display-spacing: 'Inconsolata', sans-serif;
   --font-body-spacing: 'Inconsolata', sans-serif;
+}
+
+/*Stop that incredibly annoying weird feature of font optimisation that fucks up code rendering*/
+* {
+  font-feature-settings: normal !important;
+  font-variation-settings: normal !important;
+  font-synthesis: none !important;
 }
 
 html, body {
@@ -64,7 +78,6 @@ img {
   display: block;
   margin: 1em auto;
 }
-
 
 /* Light theme background */
 [data-theme="light"] body {
@@ -188,6 +201,7 @@ main {
   }
 
 }
+
 
 /* Search tweak */
 .search {
